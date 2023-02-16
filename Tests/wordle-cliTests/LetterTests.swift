@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import wordle_cli
 
 class LetterTests: XCTestCase {
 
@@ -15,6 +16,10 @@ class LetterTests: XCTestCase {
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+
+    func testLetter() throws {
+        let myLetter = Letter()
     }
 
     func testExample() throws {

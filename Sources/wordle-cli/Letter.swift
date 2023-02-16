@@ -5,3 +5,7 @@
 //
 
 import Foundation
+
+public class Letter {
+    public init() {}
+}
