@@ -7,5 +7,9 @@
 import Foundation
 
 public class Letter {
-    public init() {}
+    public var char: Character
+
+    public init(myLetter c: Character) {
+        char = c
+    }
 }
