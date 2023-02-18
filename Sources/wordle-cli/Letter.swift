@@ -14,4 +14,22 @@ public class Letter {
     public init(myLetter c: Character) {
         char = c
     }
+
+    public func letterWithStatus() -> String {
+        var surroundChar = " "
+        if inWord && inCorrectSpot {
+          surroundChar = "+"
+        }
+        if inWord && !inCorrectSpot {
+          surroundChar = "-"
+        }
+        if !inWord && !inCorrectSpot {
+          surroundChar = " "
+        }
+        if !inWord && inCorrectSpot {
+          // Non-sense situation
+          surroundChar = " "
+        }
+        return surroundChar + String(char).uppercased() + surroundChar
+    }
 }

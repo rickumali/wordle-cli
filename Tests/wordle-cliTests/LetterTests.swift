@@ -21,4 +21,9 @@ class LetterTests: XCTestCase {
         XCTAssertFalse(myLetter.inCorrectSpot)
     }
 
+    func testDefaultLetterStatus() throws {
+        let myLetter = Letter(myLetter: "k")
+        XCTAssert(myLetter.letterWithStatus() == " K ")
+    }
+
 }
