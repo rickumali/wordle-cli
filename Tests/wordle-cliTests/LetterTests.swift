@@ -15,4 +15,10 @@ class LetterTests: XCTestCase {
         XCTAssertTrue(myLetter.char.isLetter)
     }
 
+    func testThatLetterHasDefaultProps() throws {
+        let myLetter = Letter(myLetter: "g")
+        XCTAssertFalse(myLetter.inWord)
+        XCTAssertFalse(myLetter.inCorrectSpot)
+    }
+
 }
