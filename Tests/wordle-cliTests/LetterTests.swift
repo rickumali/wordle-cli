@@ -26,4 +26,23 @@ class LetterTests: XCTestCase {
         XCTAssert(myLetter.letterWithStatus() == " K ")
     }
 
+    func testLetterInWordOnly() throws {
+        let myLetter = Letter(myLetter: "g")
+        myLetter.inWord = true
+        XCTAssert(myLetter.letterWithStatus() == "-G-")
+    }
+
+    func testLetterInWordAndCorrectSpot() throws {
+        let myLetter = Letter(myLetter: "h")
+        myLetter.inWord = true
+        myLetter.inCorrectSpot = true
+        XCTAssert(myLetter.letterWithStatus() == "+H+")
+    }
+
+    func testLetterInNonsenseSituation() throws {
+        let myLetter = Letter(myLetter: "m")
+        myLetter.inWord = false
+        myLetter.inCorrectSpot = true
+        XCTAssert(myLetter.letterWithStatus() == " M ")
+    }
 }
