@@ -5,7 +5,10 @@
 //
 
 import XCTest
+import wordle_cli
 
 class GuessRowTests: XCTestCase {
-
+    func testCreateGuessRow() {
+        var row: GuessRow = GuessRow(guess: "hello")
+    }
 }
