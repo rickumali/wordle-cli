@@ -5,6 +5,7 @@
 //
 
 import XCTest
+@testable
 import wordle_cli
 
 class GuessRowTests: XCTestCase {
