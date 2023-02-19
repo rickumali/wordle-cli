@@ -10,5 +10,6 @@ import wordle_cli
 class GuessRowTests: XCTestCase {
     func testCreateGuessRow() {
         var row: GuessRow = GuessRow(guess: "hello")
+        XCTAssert(row.guessLetters[0].char.isLetter)
     }
 }

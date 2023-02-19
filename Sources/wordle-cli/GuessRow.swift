@@ -5,8 +5,11 @@
 //
 
 public class GuessRow {
-    var guessLetters: [Letter] = []
+    public var guessLetters: [Letter] = []
 
     public init(guess s: String) {
+        for c in s {
+            guessLetters.append(Letter(myLetter: c))
+        }
     }
 }
