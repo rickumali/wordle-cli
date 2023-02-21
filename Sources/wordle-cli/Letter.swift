@@ -6,16 +6,16 @@
 
 import Foundation
 
-public class Letter {
-    public var char: Character
-    public var inWord: Bool = false
-    public var inCorrectSpot: Bool = false
+class Letter {
+    var char: Character
+    var inWord: Bool = false
+    var inCorrectSpot: Bool = false
 
-    public init(myLetter c: Character) {
+    init(myLetter c: Character) {
         char = c
     }
 
-    public func letterWithStatus() -> String {
+    func letterWithStatus() -> String {
         var surroundChar = " "
         if inWord && inCorrectSpot {
           surroundChar = "+"

@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable
 import wordle_cli
 
 class LetterTests: XCTestCase {
