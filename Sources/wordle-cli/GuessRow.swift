@@ -12,4 +12,12 @@ class GuessRow {
             guessLetters.append(Letter(myLetter: c))
         }
     }
+
+    func row() -> String {
+        var str = "|"
+        for c in guessLetters {
+            str += c.letterWithStatus() + "|"
+        }
+        return str
+    }
 }

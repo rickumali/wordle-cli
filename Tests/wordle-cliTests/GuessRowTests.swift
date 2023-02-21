@@ -13,4 +13,9 @@ class GuessRowTests: XCTestCase {
         var row: GuessRow = GuessRow(guess: "hello")
         XCTAssert(row.guessLetters[0].char.isLetter)
     }
+
+    func testRowInitial() {
+        let guess: GuessRow = GuessRow(guess: "catch")
+        XCTAssertEqual(guess.row(), "| C | A | T | C | H |")
+    }
 }
