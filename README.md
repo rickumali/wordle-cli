@@ -2,10 +2,12 @@
 
 This is a Swift command line application of Wordle.
 
+```
 |-A-| U | D | I |-O-|
 |-T-|-O-|-A-| D | S |
 |-A-|-B-|-O-| U |-T-|
 |+B+|+A+|+T+|+O+|+N+|
+```
 
 This was built "live" on YouTube:
 
