@@ -18,4 +18,12 @@ class GuessRowTests: XCTestCase {
         let guess: GuessRow = GuessRow(guess: "catch")
         XCTAssertEqual(guess.row(), "| C | A | T | C | H |")
     }
+
+    func testRowWithLetterUpdates() {
+        let guess: GuessRow = GuessRow(guess: "taser")
+        guess.guessLetters[0].inWord = true
+        guess.guessLetters[0].inCorrectSpot = true
+        guess.guessLetters[4].inWord = true
+        XCTAssertEqual(guess.row(), "|+T+| A | S | E |-R-|")
+    }
 }
