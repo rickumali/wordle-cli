@@ -26,4 +26,10 @@ class GuessRowTests: XCTestCase {
         guess.guessLetters[4].inWord = true
         XCTAssertEqual(guess.row(), "|+T+| A | S | E |-R-|")
     }
+
+    func testUpdateRowCraze() {
+        let guess: GuessRow = GuessRow(guess: "crabs")
+        guess.updateRow(correctWord: "craze")
+        XCTAssertEqual(guess.row(), "|+C+|+R+|+A+| B | S |")
+    }
 }
