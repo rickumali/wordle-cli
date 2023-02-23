@@ -21,22 +21,16 @@ class GuessRow {
         return str
     }
 
- //   for every position/letter in guess
- //     is guess position/letter same as correct position/letter?
- //       YES:
- //         1) mark guess position/letter inWord=true, inCorrectSpot=true
- //         2) remove matching correct letter from array of correct letters
- //       NO: do nothing
     func updateRow(correctWord s: String) {
-        var i = 0
-        for c in guessLetters {
+        var remainingLetters: [Character] = []
+        for (i, c) in guessLetters.enumerated() {
             let idx1 = String.Index(utf16Offset: i, in: s)
             if c.char == s[idx1] {
                 c.inWord = true
                 c.inCorrectSpot = true
-                // s.removeLetter
+            } else {
+                remainingLetters.append(s[idx1])
             }
-            i += 1
         }
     }
 }
