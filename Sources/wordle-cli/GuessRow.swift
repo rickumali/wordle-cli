@@ -32,5 +32,15 @@ class GuessRow {
                 remainingLetters.append(s[idx1])
             }
         }
+
+        for c in guessLetters {
+            if c.inCorrectSpot != true {
+                if let idx = remainingLetters.firstIndex(of: c.char) {
+                    c.inWord = true
+                    c.inCorrectSpot = false
+                    remainingLetters.remove(at: idx)
+                }
+            }
+        }
     }
 }
