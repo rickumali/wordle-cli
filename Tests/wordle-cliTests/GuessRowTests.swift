@@ -32,4 +32,16 @@ class GuessRowTests: XCTestCase {
         guess.updateRow(correctWord: "craze")
         XCTAssertEqual(guess.row(), "|+C+|+R+|+A+| B | S |")
     }
+
+    func testUpdateRowFirstGuessLucky() {
+        let guess: GuessRow = GuessRow(guess: "plant")
+        guess.updateRow(correctWord: "plant")
+        XCTAssertEqual(guess.row(), "|+P+|+L+|+A+|+N+|+T+|")
+    }
+
+    func testUpdateRowFirstGuessNoLetters() {
+        let guess: GuessRow = GuessRow(guess: "click")
+        guess.updateRow(correctWord: "taser")
+        XCTAssertEqual(guess.row(), "| C | L | I | C | K |")
+    }
 }
