@@ -62,4 +62,10 @@ class GuessRowTests: XCTestCase {
         guess.updateRow(correctWord: "baton")
         XCTAssertEqual(guess.row(), "|-A-|-B-|-O-| U |-T-|")
     }
+
+    func testUpdateRowPalindrome() {
+        let guess: GuessRow = GuessRow(guess: "abcde")
+        guess.updateRow(correctWord: "edbac")
+        XCTAssertEqual(guess.row(), "|-A-|-B-|-C-|-D-|-E-|")
+    }
 }
