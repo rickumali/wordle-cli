@@ -50,4 +50,10 @@ class GuessRowTests: XCTestCase {
         guess.updateRow(correctWord: "aroma")
         XCTAssertEqual(guess.row(), "| W |-A-| L | K | S |")
     }
+
+    func testUpdateRowAromaTwoOne() {
+        let guess: GuessRow = GuessRow(guess: "tramp")
+        guess.updateRow(correctWord: "aroma")
+        XCTAssertEqual(guess.row(), "| T |+R+|-A-|+M+| P |")
+    }
 }
