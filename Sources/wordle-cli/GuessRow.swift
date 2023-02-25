@@ -43,4 +43,13 @@ class GuessRow {
             }
         }
     }
+
+    func matchesCorrectWord() -> Bool {
+        for c in guessLetters {
+            if !c.inCorrectSpot {
+                return false
+            }
+        }
+        return true
+    }
 }
