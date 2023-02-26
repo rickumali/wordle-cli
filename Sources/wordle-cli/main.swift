@@ -9,15 +9,15 @@ func getCorrectWord() -> String {
 var guess: String
 /// This variable tracks whether input is 5 letters or not
 var goodInput: Bool
-// This is two slahes BOO
+/// This variable contains the correct word
 var correctWord: String = getCorrectWord()
-var guessRow: GuessRow
+/// This variable contains previous guesses
 var prevGuessRows: [GuessRow] = []
+
 for guessCounter in 1...6 {
     goodInput = false
-    // TODO: Make this repeat/while a function
+    // TODO: Consider making this repeat/while a function
     repeat {
-        // TODO: Make this announce the count
         print("Guess (\(guessCounter) out of 6)?", terminator: " ")
         guess = readLine()!
         if guess.count == 5 {
@@ -26,7 +26,7 @@ for guessCounter in 1...6 {
             print("You need a five letter word!")
         }
     } while !goodInput
-    guessRow = GuessRow(guess: guess.uppercased())
+    let guessRow = GuessRow(guess: guess.uppercased())
     // TODO: Check guess in dictionary
     guessRow.updateRow(correctWord: correctWord.uppercased())
     prevGuessRows.append(guessRow)
@@ -40,6 +40,7 @@ for guessCounter in 1...6 {
         break
     }
     if guessCounter == 6 {
+        print("The correct word was \(correctWord.uppercased())")
         break
     }
 }
