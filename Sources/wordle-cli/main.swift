@@ -12,14 +12,14 @@ var goodInput: Bool
 // This is two slahes BOO
 var correctWord: String = getCorrectWord()
 var guessRow: GuessRow
+var prevGuessRows: [GuessRow] = []
 for guessCounter in 1...6 {
     goodInput = false
     // TODO: Make this repeat/while a function
     repeat {
         // TODO: Make this announce the count
-        print("?", terminator: " ")
+        print("Guess (\(guessCounter) out of 6)?", terminator: " ")
         guess = readLine()!
-        print("You entered: \(guess)")
         if guess.count == 5 {
             goodInput = true
         } else {
@@ -29,8 +29,11 @@ for guessCounter in 1...6 {
     guessRow = GuessRow(guess: guess.uppercased())
     // TODO: Check guess in dictionary
     guessRow.updateRow(correctWord: correctWord.uppercased())
-    // TODO: Store previous GuessRows in array for redisplay?
-    print(guessRow.row())
+    prevGuessRows.append(guessRow)
+    for (c, r) in prevGuessRows.enumerated() {
+        print("\(c + 1):", terminator: " ")
+        print(r.row())
+    }
     if guessRow.matchesCorrectWord() {
         // TODO: Make this a function. Cool message per value
         print("You got it in \(guessCounter) guesses")
