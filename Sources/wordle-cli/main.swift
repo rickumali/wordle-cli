@@ -2,6 +2,25 @@ print("wordle-cli by Rick Umali")
 
 import Foundation
 
+func corectWordMessage(guessCount: Int) {
+    switch guessCount {
+    case 1:
+        print("Amazing! You got in 1 guess!")
+    case 2:
+        print("Wow! Two guesses!")
+    case 3:
+        print("Great! You got in 3 guesses!")
+    case 4:
+        print("Fantastic! Four guesses!")
+    case 5:
+        print("Good work! Five guesses.")
+    case 6:
+        print("Whew! On the last (6th) guess!")
+    default:
+        print("You got it!")
+    }
+}
+
 /// TODO: Make this interact with dictionary
 func getCorrectWord() -> String {
     return ProcessInfo.processInfo.environment["PUZZLE_WORD"] ?? "aroma"
@@ -37,8 +56,7 @@ for guessCounter in 1...6 {
         print(r.row())
     }
     if guessRow.matchesCorrectWord() {
-        // TODO: Make this a function. Cool message per value
-        print("You got it in \(guessCounter) guesses")
+        corectWordMessage(guessCount: guessCounter)
         break
     }
     if guessCounter == 6 {
