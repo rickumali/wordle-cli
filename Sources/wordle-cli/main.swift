@@ -1,8 +1,10 @@
 print("wordle-cli by Rick Umali")
 
+import Foundation
+
 /// TODO: Make this interact with dictionary
 func getCorrectWord() -> String {
-    return "aroma"
+    return ProcessInfo.processInfo.environment["PUZZLE_WORD"] ?? "aroma"
 }
 
 /// This variable holds the guess from the user
