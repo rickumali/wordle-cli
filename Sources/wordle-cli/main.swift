@@ -21,6 +21,9 @@ func corectWordMessage(guessCount: Int) {
     }
 }
 
+var wordleWords = WordleWords()
+try wordleWords.load()
+
 /// TODO: Make this interact with dictionary
 func getCorrectWord() -> String {
     return ProcessInfo.processInfo.environment["PUZZLE_WORD"] ?? "aroma"
