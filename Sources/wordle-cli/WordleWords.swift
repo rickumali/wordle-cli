@@ -11,7 +11,11 @@ class WordleWords {
     }
 
     func getRandomCorrectWord() -> String {
-        return ProcessInfo.processInfo.environment["PUZZLE_WORD"] ?? "aroma"
+        if (ProcessInfo.processInfo.environment["PUZZLE_WORD"] != nil) {
+            return ProcessInfo.processInfo.environment["PUZZLE_WORD"]!
+        } else {
+            return "aroma"
+        }
     }
 
     func load() throws {
