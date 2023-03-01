@@ -10,6 +10,10 @@ class WordleWords {
     init() {
     }
 
+    func getRandomCorrectWord() -> String {
+        return ProcessInfo.processInfo.environment["PUZZLE_WORD"] ?? "aroma"
+    }
+
     func load() throws {
         let home = URL(fileURLWithPath: NSHomeDirectory())
         let url = home.appendingPathComponent("Projects/wordle-cli/valid-wordle-words.txt")

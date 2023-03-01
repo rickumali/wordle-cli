@@ -24,17 +24,12 @@ func corectWordMessage(guessCount: Int) {
 var wordleWords = WordleWords()
 try wordleWords.load()
 
-/// TODO: Make this interact with dictionary
-func getCorrectWord() -> String {
-    return ProcessInfo.processInfo.environment["PUZZLE_WORD"] ?? "aroma"
-}
-
 /// This variable holds the guess from the user
 var guess: String
 /// This variable tracks whether input is 5 letters or not
 var goodInput: Bool
 /// This variable contains the correct word
-var correctWord: String = getCorrectWord()
+var correctWord: String = wordleWords.getRandomCorrectWord()
 /// This variable contains previous guesses
 var prevGuessRows: [GuessRow] = []
 
