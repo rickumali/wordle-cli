@@ -23,7 +23,7 @@ class WordleWords {
         let url = home.appendingPathComponent("Projects/wordle-cli/valid-wordle-words.txt")
         let file = try String(contentsOf: url)
         file.enumerateLines { (line, shouldContinue) in
-            print(line)
+            // Store in collection
         }
     }
 }
