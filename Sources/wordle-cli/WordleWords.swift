@@ -7,14 +7,17 @@
 import Foundation
 
 class WordleWords {
+    var words: Set<String>
+
     init() {
+        words = []
     }
 
     func getRandomCorrectWord() -> String {
         if (ProcessInfo.processInfo.environment["PUZZLE_WORD"] != nil) {
             return ProcessInfo.processInfo.environment["PUZZLE_WORD"]!
         } else {
-            return "aroma"
+            return words.randomElement()!
         }
     }
 
@@ -23,7 +26,7 @@ class WordleWords {
         let url = home.appendingPathComponent("Projects/wordle-cli/valid-wordle-words.txt")
         let file = try String(contentsOf: url)
         file.enumerateLines { (line, shouldContinue) in
-            // Store in collection
+            self.words.insert(line)
         }
     }
 }
