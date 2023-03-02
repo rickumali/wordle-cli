@@ -39,6 +39,12 @@ for guessCounter in 1...6 {
     repeat {
         print("Guess (\(guessCounter) out of 6)?", terminator: " ")
         guess = readLine()!
+        // TODO: Consider making "aeiou" the backdoor
+        let backdoorNum = Int(guess) ?? 0
+        if backdoorNum == -99 {
+            print("Pssst: \(correctWord.uppercased())")
+            continue
+        }
         if guess.count == 5 {
             goodInput = true
         } else {
