@@ -46,13 +46,16 @@ for guessCounter in 1...6 {
             continue
         }
         if guess.count == 5 {
-            goodInput = true
+            if wordleWords.valid(guess) {
+                goodInput = true
+            } else {
+                print("Your word is not in my dictionary!")
+            }
         } else {
             print("You need a five letter word!")
         }
     } while !goodInput
     let guessRow = GuessRow(guess: guess.uppercased())
-    // TODO: Check guess in dictionary
     guessRow.updateRow(correctWord: correctWord.uppercased())
     prevGuessRows.append(guessRow)
     for (c, r) in prevGuessRows.enumerated() {

@@ -29,4 +29,8 @@ class WordleWords {
             self.words.insert(line)
         }
     }
+
+    func valid(_ w: String) -> Bool {
+        return self.words.contains(w)
+    }
 }
