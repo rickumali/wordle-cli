@@ -46,7 +46,7 @@ for guessCounter in 1...6 {
             continue
         }
         if guess.count == 5 {
-            if wordleWords.valid(guess) {
+            if wordleWords.valid(guess.lowercased()) {
                 goodInput = true
             } else {
                 print("Your word is not in my dictionary!")
