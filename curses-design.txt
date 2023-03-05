@@ -1,0 +1,20 @@
+
+
+
+    wordle-cli (by Rick Umali)
+    
+            1: | T |-A-| S |-E-| R |
+            2: | H |+E+|-A-| T | H |
+            3: |+D+|+E+| L |+A+|+Y+|
+            4: |   |   |   |   |   |
+            5: |   |   |   |   |   |
+            6: |   |   |   |   |   |
+    
+               Q W E R T Y U I O P
+                A S D F G H J K L
+                 Z X C V B N M
+    
+    Guess 4 of 6 (? = help): aeiou
+    'aeiou' is not in my dictionary!
+
+
