@@ -17,6 +17,8 @@ let package = Package(
             dependencies: []),
         .executableTarget(name: "ncurses-mock",
                           linkerSettings:[LinkerSetting.linkedLibrary("ncurses")]),
+        .executableTarget(name: "swift-curses-mock1",
+                          linkerSettings:[LinkerSetting.linkedLibrary("ncurses")]),
         .testTarget(
             name: "wordle-cliTests",
             dependencies: ["wordle-cli"]),
