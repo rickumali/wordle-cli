@@ -9,6 +9,36 @@ import SwiftCursesTerm
 let prompt_len = 15
 
 var term = SwiftCursesTerm()
+
+let green = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.green)
+let yellow = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.yellow)
+
+func updateGuessRowGuiWide(g: Int, s: String) {
+    var offset: Int = 12
+    let y: Int = Int(g) + 4
+    term.addStrTo(content: "\(g): |   |   |   |   |   |", line: y, column: 8)
+    for c in s.enumerated() {
+        let color = Int.random(in: 0...3)
+        switch(color) {
+            case 0:
+                term.resetAttributes()
+                break
+            case 1:
+                term.setAttributes([], colorPair: green)
+                break
+            case 2:
+                term.setAttributes([], colorPair: yellow)
+                break
+            default:
+                break
+        }
+        term.addStrTo(content: " \(c.element) ", line: y, column: offset)
+        term.refresh()
+        term.resetAttributes()
+        offset += 4
+    }
+}
+
 term.addStrTo(content: "wordle-cli (by Rick Umali)", line: 3, column: 3)
 term.addStrTo(content: "1: |   |   |   |   |   |", line: 5, column: 8)
 term.addStrTo(content: "2: |   |   |   |   |   |", line: 6, column: 8)
@@ -35,7 +65,7 @@ while guess_count != 7 {
     let guessString = String(cString: raw_str)
     term.addStrTo(content: "Entered: \(guessString)", line: 17, column: 3);
 
-    // updateGuessRowGuiWide(g: guess_count, s: guessString)
+    updateGuessRowGuiWide(g: guess_count, s: guessString)
     guess_count += 1
 }
 term.addStrTo(content: "That's it! Any key to quit!", line: 17, column: 3);
