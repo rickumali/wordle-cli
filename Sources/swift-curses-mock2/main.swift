@@ -50,18 +50,32 @@ term.addStrTo(content: "Q W E R T Y U I O P", line: 12, column: 10)
 term.addStrTo(content: "A S D F G H J K L", line: 13, column: 11)
 term.addStrTo(content: "Z X C V B N M", line: 14, column: 12)
 
+// KEY: This declares an empty array of 40 NULLs
+var raw_str: [CChar] = Array(repeating: CChar(0), count: 40)
+var guessString: String
+var goodInput: Bool
 for guessCounter in 1...6 {
-    term.addStrTo(content: "Guess (\(guessCounter) of 6)", line: 16, column: 3)
-    term.addStrTo(content: "         ", line: 16, column: 3 + prompt_len );
-    term.move(window: nil, line: 16, column: 3 + prompt_len)
+    goodInput = false
+    repeat {
+        term.addStrTo(content: "Guess (\(guessCounter) of 6)", line: 16, column: 3)
+        term.addStrTo(content: "         ", line: 16, column: 3 + prompt_len );
+        term.move(window: nil, line: 16, column: 3 + prompt_len)
 
-    term.refresh()
-    // KEY: This declares an empty array of 40 NULLs
-    var raw_str: [CChar] = Array(repeating: CChar(0), count: 40)
-    // KEY: Getting the 'address' by ampersand
-    // KEY: This was lucky, and Xcode guided me somewhat
-    getstr(&raw_str)
-    let guessString = String(cString: raw_str)
+        term.refresh()
+        // KEY: Getting the 'address' by ampersand
+        // KEY: This was lucky, and Xcode guided me somewhat
+        getstr(&raw_str)
+        guessString = String(cString: raw_str)
+        if guessString.count == 5 {
+            goodInput = true
+            // term.move(window: nil, line: 17, column: 3)
+            // addnstr(" ", 80)
+            term.addStrTo(content: "                           ", line: 17, column: 3);
+            term.refresh()
+        } else {
+            term.addStrTo(content: "You need a five letter word!", line: 17, column: 3);
+        }
+    } while !goodInput
     term.addStrTo(content: "Entered: \(guessString)", line: 17, column: 3);
 
     updateGuessRowGuiWide(g: guessCounter, s: guessString)
