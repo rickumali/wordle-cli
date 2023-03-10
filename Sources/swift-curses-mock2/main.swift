@@ -15,7 +15,7 @@ let yellow = term.defineColorPair(foreground: CursesColor.black, background: Cur
 
 func updateGuessRowGuiWide(g: Int, s: String) {
     var offset: Int = 12
-    let y: Int = Int(g) + 4
+    let y: Int = Int(g) + 3
     term.addStrTo(content: "\(g): |   |   |   |   |   |", line: y, column: 8)
     for c in s.enumerated() {
         let color = Int.random(in: 0...3)
@@ -50,9 +50,8 @@ term.addStrTo(content: "Q W E R T Y U I O P", line: 12, column: 10)
 term.addStrTo(content: "A S D F G H J K L", line: 13, column: 11)
 term.addStrTo(content: "Z X C V B N M", line: 14, column: 12)
 
-var guess_count: Int = 1
-while guess_count != 7 {
-    term.addStrTo(content: "Guess (\(guess_count) of 6)", line: 16, column: 3)
+for guessCounter in 1...6 {
+    term.addStrTo(content: "Guess (\(guessCounter) of 6)", line: 16, column: 3)
     term.addStrTo(content: "         ", line: 16, column: 3 + prompt_len );
     term.move(window: nil, line: 16, column: 3 + prompt_len)
 
@@ -65,8 +64,7 @@ while guess_count != 7 {
     let guessString = String(cString: raw_str)
     term.addStrTo(content: "Entered: \(guessString)", line: 17, column: 3);
 
-    updateGuessRowGuiWide(g: guess_count, s: guessString)
-    guess_count += 1
+    updateGuessRowGuiWide(g: guessCounter, s: guessString)
 }
 term.addStrTo(content: "That's it! Any key to quit!", line: 17, column: 3);
 
