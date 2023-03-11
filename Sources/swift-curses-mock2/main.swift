@@ -13,6 +13,8 @@ var term = SwiftCursesTerm()
 let green = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.green)
 let yellow = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.yellow)
 
+let eightySpaces = String(repeatElement(" ", count: 80))
+
 func updateGuessRowGuiWide(g: Int, s: String) {
     var offset: Int = 12
     let y: Int = Int(g) + 3
@@ -68,9 +70,7 @@ for guessCounter in 1...6 {
         guessString = String(cString: raw_str)
         if guessString.count == 5 {
             goodInput = true
-            // term.move(window: nil, line: 17, column: 3)
-            // addnstr(" ", 80)
-            term.addStrTo(content: "                           ", line: 17, column: 3);
+            term.addStrTo(content: eightySpaces, line: 17, column: 3);
             term.refresh()
         } else {
             term.addStrTo(content: "You need a five letter word!", line: 17, column: 3);
