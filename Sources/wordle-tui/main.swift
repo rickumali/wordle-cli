@@ -9,6 +9,7 @@ import SwiftCursesTerm
 let prompt_len = 15
 
 var term = SwiftCursesTerm()
+term.refresh()
 
 let green = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.green)
 let yellow = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.yellow)
@@ -41,7 +42,9 @@ func updateGuessRowGuiWide(g: Int, s: String) {
     }
 }
 
-term.addStrTo(content: "wordle-cli (by Rick Umali)", line: 3, column: 3)
+var game_title = term.newWindow(height: 1, width: 40, line: 3, column: 3)
+
+term.addStr(window: game_title, content: "wordle-cli (by Rick Umali)", refresh: true)
 term.addStrTo(content: "1: |   |   |   |   |   |", line: 5, column: 8)
 term.addStrTo(content: "2: |   |   |   |   |   |", line: 6, column: 8)
 term.addStrTo(content: "3: |   |   |   |   |   |", line: 7, column: 8)
