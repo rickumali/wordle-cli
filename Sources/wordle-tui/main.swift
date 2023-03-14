@@ -16,34 +16,36 @@ let yellow = term.defineColorPair(foreground: CursesColor.black, background: Cur
 
 let eightySpaces = String(repeatElement(" ", count: 80))
 
-func updateGuessRowGuiWide(g: Int, s: String) {
-    var offset: Int = 12
-    let y: Int = Int(g) + 3
-    term.addStrTo(content: "\(g): |   |   |   |   |   |", line: y, column: 8)
+func updateGuessRowGuiWide(g: Int, s: String, w: SCTWindowId) {
+    var offset: Int = 4
+    let y: Int = Int(g) - 1
+    term.setAttributes(window: w, [])
+    term.addStrTo(window: w, content: "\(g): |   |   |   |   |   |", line: y, column: 0)
     for c in s.enumerated() {
         let color = Int.random(in: 0...3)
         switch(color) {
             case 0:
-                term.resetAttributes()
+                term.setAttributes(window: w, [])
                 break
             case 1:
-                term.setAttributes([], colorPair: green)
+                term.setAttributes(window: w, [], colorPair: green)
                 break
             case 2:
-                term.setAttributes([], colorPair: yellow)
+                term.setAttributes(window: w, [], colorPair: yellow)
                 break
             default:
                 break
         }
-        term.addStrTo(content: " \(c.element) ", line: y, column: offset)
-        term.refresh()
-        term.resetAttributes()
+        term.addStrTo(window: w, content: " \(c.element) ", line: y, column: offset)
+        term.refresh(window: w)
+        term.setAttributes(window: w, [])
         offset += 4
     }
 }
 
 var game_title = term.newWindow(height: 1, width: 40, line: 3, column: 3)
 var guessesBoard = term.newWindow(height: 6, width: 40, line: 5, column: 8)
+var keyboardDisplay = term.newWindow(height: 3, width: 40, line: 5, column: 8)
 
 term.addStr(window: game_title, content: "wordle-cli (by Rick Umali)", refresh: true)
 term.addStrTo(window: guessesBoard, content: "1: |   |   |   |   |   |", line: 0, column: 0)
@@ -82,7 +84,7 @@ for guessCounter in 1...6 {
     } while !goodInput
     term.addStrTo(content: "Entered: \(guessString)", line: 17, column: 3);
 
-    updateGuessRowGuiWide(g: guessCounter, s: guessString)
+    updateGuessRowGuiWide(g: guessCounter, s: guessString, w: guessesBoard)
 }
 term.addStrTo(content: "That's it! Any key to quit!", line: 17, column: 3);
 
