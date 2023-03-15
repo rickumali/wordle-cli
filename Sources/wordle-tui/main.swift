@@ -19,13 +19,13 @@ let eightySpaces = String(repeatElement(" ", count: 80))
 func updateGuessRowGuiWide(g: Int, s: String, w: SCTWindowId) {
     var offset: Int = 4
     let y: Int = Int(g) - 1
-    term.setAttributes(window: w, [])
+    term.setAttributes(window: w, [TextAttribute.normal], colorPair: nil)
     term.addStrTo(window: w, content: "\(g): |   |   |   |   |   |", line: y, column: 0)
     for c in s.enumerated() {
         let color = Int.random(in: 0...3)
         switch(color) {
             case 0:
-                term.setAttributes(window: w, [])
+                term.setAttributes(window: w, [TextAttribute.normal], colorPair: nil)
                 break
             case 1:
                 term.setAttributes(window: w, [], colorPair: green)
@@ -37,10 +37,10 @@ func updateGuessRowGuiWide(g: Int, s: String, w: SCTWindowId) {
                 break
         }
         term.addStrTo(window: w, content: " \(c.element) ", line: y, column: offset)
-        term.refresh(window: w)
-        term.setAttributes(window: w, [])
+        term.setAttributes(window: w, [TextAttribute.normal], colorPair: nil)
         offset += 4
     }
+    term.refresh(window: w)
 }
 
 var game_title = term.newWindow(height: 1, width: 40, line: 3, column: 3)
