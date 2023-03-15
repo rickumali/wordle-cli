@@ -66,7 +66,7 @@ for guessCounter in 1...6 {
     goodInput = false
     repeat {
         term.addStrTo(content: "Guess (\(guessCounter) of 6)", line: 16, column: 3)
-        term.addStrTo(content: "         ", line: 16, column: 3 + prompt_len );
+        term.addStrTo(content: String(eightySpaces.suffix(80 - (3 + prompt_len))), line: 16, column: 3 + prompt_len);
         term.move(window: nil, line: 16, column: 3 + prompt_len)
 
         term.refresh()
