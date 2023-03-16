@@ -9,13 +9,13 @@ import SwiftCursesTerm
 let prompt_len = 15
 
 class WordleCurses {
-    var term
-    var game_title
-    var guessesBoard
-    var keyboardDisplay
-    let green
-    let yellow
-    let eightySpaces
+    var term: SwiftCursesTerm
+    var game_title: SCTWindowId
+    var guessesBoard: SCTWindowId
+    var keyboardDisplay: SCTWindowId
+    let green: SCTColorPair
+    let yellow: SCTColorPair
+    let eightySpaces: String
 
     init() {
         term = SwiftCursesTerm()
@@ -68,7 +68,7 @@ class WordleCurses {
         term.addStrTo(content: "Z X C V B N M", line: 14, column: 12)
     }
 
-    func prompt() -> String {
+    func prompt(g: Int) -> String {
         // KEY: This declares an empty array of 40 NULLs
         var raw_str: [CChar] = Array(repeating: CChar(0), count: 40)
         var guessString: String
@@ -76,7 +76,7 @@ class WordleCurses {
 
         goodInput = false
         repeat {
-            term.addStrTo(content: "Guess (\(guessCounter) of 6)", line: 16, column: 3)
+            term.addStrTo(content: "Guess (\(g) of 6)", line: 16, column: 3)
             term.addStrTo(content: String(eightySpaces.suffix(80 - (3 + prompt_len))), line: 16, column: 3 + prompt_len);
             term.move(window: nil, line: 16, column: 3 + prompt_len)
     
@@ -99,19 +99,19 @@ class WordleCurses {
 }
 
 // New Main
-wordle_tui = WorldCurses()
+var wordle_tui = WordleCurses()
 
 wordle_tui.draw()
 
 for guessCounter in 1...6 {
-    var guessStirng: String
-    guessString = wordle_tui.prompt()
-    updateGuessRowGuiWide(g: guessCounter, s: guessString)
+    var guessString: String
+    guessString = wordle_tui.prompt(g: guessCounter)
+    wordle_tui.updateGuessRowGuiWide(g: guessCounter, s: guessString)
 }
 
-term.addStrTo(content: "That's it! Any key to quit!", line: 17, column: 3);
-term.refresh()
+// term.addStrTo(content: "That's it! Any key to quit!", line: 17, column: 3);
+// term.refresh()
 
 getch()
-term.shutdown()
+// term.shutdown()
 exit(EXIT_SUCCESS)
