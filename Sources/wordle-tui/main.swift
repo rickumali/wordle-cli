@@ -96,6 +96,12 @@ class WordleCurses {
         term.addStrTo(content: "Entered: \(guessString)", line: 17, column: 3);
         return guessString
     }
+    func stop() {
+	term.addStrTo(content: "That's it! Any key to quit!", line: 17, column: 3);
+	term.refresh()
+	getch()
+	term.shutdown()
+    }
 }
 
 // New Main
@@ -109,9 +115,5 @@ for guessCounter in 1...6 {
     wordle_tui.updateGuessRowGuiWide(g: guessCounter, s: guessString)
 }
 
-// term.addStrTo(content: "That's it! Any key to quit!", line: 17, column: 3);
-// term.refresh()
-
-getch()
-// term.shutdown()
+wordle_tui.stop()
 exit(EXIT_SUCCESS)
