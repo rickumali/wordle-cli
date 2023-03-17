@@ -20,6 +20,7 @@ class WordleCurses {
 
     init() {
         term = SwiftCursesTerm()
+        term.refresh()
 
         eightySpaces = String(repeatElement(" ", count: 80))
         game_title = term.newWindow(height: 1, width: 40, line: 3, column: 3)
