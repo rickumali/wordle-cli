@@ -21,6 +21,24 @@ public class GuessRow {
         return str
     }
 
+    // TODO: Consider using enum
+    // TODO: Add tests!
+    public func letterWithStat() -> [(String, String)] {
+        var letterStats : [(String, String)] = []
+        for c in guessLetters {
+            var stat: String
+            if c.inCorrectSpot {
+                stat = "GREEN"
+            } else if c.inWord {
+                stat = "YELLOW"
+            } else {
+                stat = "NONE"
+            }
+            letterStats.append((String(c.char), stat))
+        }
+        return letterStats
+    }
+
     public func updateRow(correctWord s: String) {
         var remainingLetters: [Character] = []
         for (i, c) in guessLetters.enumerated() {
