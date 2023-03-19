@@ -4,16 +4,16 @@
 //  Created by Rick Umali on 2/18/23.
 //
 
-class GuessRow {
+public class GuessRow {
     var guessLetters: [Letter] = []
 
-    init(guess s: String) {
+    public init(guess s: String) {
         for c in s {
             guessLetters.append(Letter(myLetter: c))
         }
     }
 
-    func row() -> String {
+    public func row() -> String {
         var str = "|"
         for c in guessLetters {
             str += c.letterWithStatus() + "|"
@@ -21,7 +21,7 @@ class GuessRow {
         return str
     }
 
-    func updateRow(correctWord s: String) {
+    public func updateRow(correctWord s: String) {
         var remainingLetters: [Character] = []
         for (i, c) in guessLetters.enumerated() {
             let idx1 = String.Index(utf16Offset: i, in: s)
@@ -44,7 +44,7 @@ class GuessRow {
         }
     }
 
-    func matchesCorrectWord() -> Bool {
+    public func matchesCorrectWord() -> Bool {
         for c in guessLetters {
             if !c.inCorrectSpot {
                 return false

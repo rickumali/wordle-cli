@@ -6,14 +6,14 @@
 
 import Foundation
 
-class WordleWords {
+public class WordleWords {
     var words: Set<String>
 
-    init() {
+    public init() {
         words = []
     }
 
-    func getRandomCorrectWord() -> String {
+    public func getRandomCorrectWord() -> String {
         if (ProcessInfo.processInfo.environment["PUZZLE_WORD"] != nil) {
             return ProcessInfo.processInfo.environment["PUZZLE_WORD"]!
         } else {
@@ -21,7 +21,7 @@ class WordleWords {
         }
     }
 
-    func load() throws {
+    public func load() throws {
         let home = URL(fileURLWithPath: NSHomeDirectory())
         let url = home.appendingPathComponent("Projects/wordle-cli/valid-wordle-words.txt")
         let file = try String(contentsOf: url)
@@ -30,7 +30,7 @@ class WordleWords {
         }
     }
 
-    func valid(_ w: String) -> Bool {
+    public func valid(_ w: String) -> Bool {
         return self.words.contains(w)
     }
 }
