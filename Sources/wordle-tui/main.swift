@@ -5,6 +5,7 @@
 
 import Foundation
 import SwiftCursesTerm
+import wordle
 
 class WordleCurses {
     let prompt_len = 15
@@ -32,27 +33,27 @@ class WordleCurses {
     }
 
 
-    func updateGuessRowGuiWide(g: Int, s: String) {
+    func updateGuessRowGuiWide(g: Int, s: GuessRow) {
         var offset: Int = 4
         let y: Int = Int(g) - 1
         term.setAttributes(window: guessesBoard, [TextAttribute.normal], colorPair: nil)
         term.addStrTo(window: guessesBoard, content: "\(g): |   |   |   |   |   |", line: y, column: 0)
-        for c in s.enumerated() {
-            let color = Int.random(in: 0...3)
+        for c in s.letterWithStat() {
+            let (letter, color) = c
             switch(color) {
-                case 0:
+                case "NONE":
                     term.setAttributes(window: guessesBoard, [TextAttribute.normal], colorPair: nil)
                     break
-                case 1:
+                case "GREEN":
                     term.setAttributes(window: guessesBoard, [], colorPair: green)
                     break
-                case 2:
+                case "YELLOW":
                     term.setAttributes(window: guessesBoard, [], colorPair: yellow)
                     break
                 default:
                     break
             }
-            term.addStrTo(window: guessesBoard, content: " \(c.element) ", line: y, column: offset)
+            term.addStrTo(window: guessesBoard, content: " \(letter) ", line: y, column: offset)
             term.setAttributes(window: guessesBoard, [TextAttribute.normal], colorPair: nil)
             offset += 4
         }
@@ -109,16 +110,27 @@ class WordleCurses {
 
 // New Main
 
+var wordleWords = WordleWords()
+try wordleWords.load()
+/// This variable contains the correct word
+var correctWord: String = wordleWords.getRandomCorrectWord()
+
+var prevGuessRows: [GuessRow] = []
+
 var game: WordleCurses = WordleCurses()
 
 game.draw()
 
 for guessCounter in 1...6 {
     var guessString: String
+    // TODO: Break out guessWord loop from view
     guessString = game.prompt(g: guessCounter)
-    game.updateGuessRowGuiWide(g: guessCounter, s: guessString)
+    let guessRow = GuessRow(guess: guessString.uppercased())
+    guessRow.updateRow(correctWord: correctWord.uppercased())
+    prevGuessRows.append(guessRow)
+    game.updateGuessRowGuiWide(g: guessCounter, s: guessRow)
 }
 
 game.close()
-
+print("CORRECT WORD: \(correctWord.uppercased())")
 exit(EXIT_SUCCESS)
