@@ -1,6 +1,7 @@
 print("wordle-cli by Rick Umali")
 
 import Foundation
+import wordle
 
 func corectWordMessage(guessCount: Int) {
     switch guessCount {
