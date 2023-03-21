@@ -13029,7 +13029,6 @@ thruv
 thuds
 thugs
 thuja
-thule
 thulr
 thumb
 thump
@@ -13522,7 +13521,6 @@ twirk
 twirl
 twirp
 twist
-twite
 twits
 twixt
 twoes
