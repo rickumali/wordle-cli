@@ -7,7 +7,7 @@
 
 import XCTest
 @testable
-import wordle_cli
+import wordle
 
 class LetterTests: XCTestCase {
 

@@ -6,7 +6,7 @@
 
 import XCTest
 @testable
-import wordle_cli
+import wordle
 
 class GuessRowTests: XCTestCase {
     func testCreateGuessRow() {
@@ -38,6 +38,9 @@ class GuessRowTests: XCTestCase {
         guess.updateRow(correctWord: "plant")
         XCTAssertEqual(guess.row(), "|+P+|+L+|+A+|+N+|+T+|")
         XCTAssertTrue(guess.matchesCorrectWord())
+        let letterStats : [(String, String)] = guess.letterWithColor()
+        XCTAssertEqual(letterStats[0].0, "p")
+        XCTAssertEqual(letterStats[0].1, "GREEN")
     }
 
     func testUpdateRowFirstGuessNoLetters() {
@@ -45,12 +48,18 @@ class GuessRowTests: XCTestCase {
         guess.updateRow(correctWord: "taser")
         XCTAssertEqual(guess.row(), "| C | L | I | C | K |")
         XCTAssertFalse(guess.matchesCorrectWord())
+        let letterStats : [(String, String)] = guess.letterWithColor()
+        XCTAssertEqual(letterStats[2].0, "i")
+        XCTAssertEqual(letterStats[2].1, "NONE")
     }
 
     func testUpdateRowAroma() {
         let guess: GuessRow = GuessRow(guess: "walks")
         guess.updateRow(correctWord: "aroma")
         XCTAssertEqual(guess.row(), "| W |-A-| L | K | S |")
+        let letterStats : [(String, String)] = guess.letterWithColor()
+        XCTAssertEqual(letterStats[1].0, "a")
+        XCTAssertEqual(letterStats[1].1, "YELLOW")
     }
 
     func testUpdateRowAromaTwoOne() {
