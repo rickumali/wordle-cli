@@ -74,30 +74,25 @@ class WordleCurses {
     }
 
     func prompt(g: Int) -> String {
+        term.addStrTo(content: "Guess (\(g) of 6)", line: 16, column: 3)
+        term.addStrTo(content: String(eightySpaces.suffix(80 - (3 + prompt_len))), line: 16, column: 3 + prompt_len);
+        term.move(window: nil, line: 16, column: 3 + prompt_len)
+        term.refresh()
+
         // KEY: This declares an empty array of 40 NULLs
         var raw_str: [CChar] = Array(repeating: CChar(0), count: 40)
-        var guessString: String
-        var goodInput: Bool
-        goodInput = false
-        repeat {
-            term.addStrTo(content: "Guess (\(g) of 6)", line: 16, column: 3)
-            term.addStrTo(content: String(eightySpaces.suffix(80 - (3 + prompt_len))), line: 16, column: 3 + prompt_len);
-            term.move(window: nil, line: 16, column: 3 + prompt_len)
+        getstr(&raw_str)
+        return String(cString: raw_str)
+    }
 
-            term.refresh()
-            // KEY: Getting the 'address' by ampersand
-            // KEY: This was lucky, and Xcode guided me somewhat
-            getstr(&raw_str)
-            guessString = String(cString: raw_str)
-            if guessString.count == 5 {
-                goodInput = true
-                term.addStrTo(content: eightySpaces, line: 17, column: 3);
-                term.refresh()
-            } else {
-                term.addStrTo(content: "You need a five letter word!", line: 17, column: 3);
-            }
-        } while !goodInput
-        return guessString
+    /// updateStatus()
+    /// If s is nil, the status line is cleared, otherwise it displays s
+    func updateStatus(s: String? = nil) {
+        if let s = s {
+            term.addStrTo(content: s, line: 17, column: 3);
+        } else {
+            term.addStrTo(content: eightySpaces, line: 17, column: 3);
+        }
     }
 
     func close() {
@@ -123,8 +118,16 @@ game.draw()
 
 for guessCounter in 1...6 {
     var guessString: String
-    // TODO: Break out guessWord loop from view
-    guessString = game.prompt(g: guessCounter)
+    var goodInput = false
+    repeat {
+        guessString = game.prompt(g: guessCounter)
+        if guessString.count == 5 {
+            goodInput = true
+            game.updateStatus()
+        } else {
+            game.updateStatus(s: "You need a five letter word!")
+        }
+    } while !goodInput
     let guessRow = GuessRow(guess: guessString.uppercased())
     guessRow.updateRow(correctWord: correctWord.uppercased())
     prevGuessRows.append(guessRow)
