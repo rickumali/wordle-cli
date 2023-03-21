@@ -21,9 +21,7 @@ public class GuessRow {
         return str
     }
 
-    // TODO: Consider using enum
-    // TODO: Add tests!
-    public func letterWithStat() -> [(String, String)] {
+    public func letterWithColor() -> [(String, String)] {
         var letterStats : [(String, String)] = []
         for c in guessLetters {
             var stat: String

@@ -38,7 +38,7 @@ class WordleCurses {
         let y: Int = Int(g) - 1
         term.setAttributes(window: guessesBoard, [TextAttribute.normal], colorPair: nil)
         term.addStrTo(window: guessesBoard, content: "\(g): |   |   |   |   |   |", line: y, column: 0)
-        for c in s.letterWithStat() {
+        for c in s.letterWithColor() {
             let (letter, color) = c
             switch(color) {
                 case "NONE":
