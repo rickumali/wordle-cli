@@ -128,8 +128,12 @@ for guessCounter in 1...6 {
             continue
         }
         if guessString.count == 5 {
-            goodInput = true
-            game.updateStatus()
+            if wordleWords.valid(guessString.lowercased()) {
+                goodInput = true
+                game.updateStatus()
+            } else {
+                game.updateStatus(s: "Your word is not in my dictionary!")
+            }
         } else {
             game.updateStatus(s: "You need a five letter word!")
         }
