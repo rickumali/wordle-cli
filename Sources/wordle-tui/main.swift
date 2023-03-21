@@ -121,6 +121,12 @@ for guessCounter in 1...6 {
     var goodInput = false
     repeat {
         guessString = game.prompt(g: guessCounter)
+        // TODO: Consider making "aeiou" the backdoor
+        let backdoorNum = Int(guessString) ?? 0
+        if backdoorNum == -99 {
+            game.updateStatus(s: "Pssst: \(correctWord.uppercased())")
+            continue
+        }
         if guessString.count == 5 {
             goodInput = true
             game.updateStatus()
