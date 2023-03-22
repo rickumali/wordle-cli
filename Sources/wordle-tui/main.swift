@@ -26,7 +26,7 @@ class WordleCurses {
         eightySpaces = String(repeatElement(" ", count: 80))
         game_title = term.newWindow(height: 1, width: 40, line: 3, column: 3)
         guessesBoard = term.newWindow(height: 6, width: 40, line: 5, column: 8)
-        keyboardDisplay = term.newWindow(height: 3, width: 40, line: 5, column: 8)
+        keyboardDisplay = term.newWindow(height: 3, width: 40, line: 12, column: 10)
 
         green = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.green)
         yellow = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.yellow)
@@ -68,9 +68,9 @@ class WordleCurses {
         term.addStrTo(window: guessesBoard, content: "4: |   |   |   |   |   |", line: 3, column: 0)
         term.addStrTo(window: guessesBoard, content: "5: |   |   |   |   |   |", line: 4, column: 0)
         term.addStrTo(window: guessesBoard, content: "6: |   |   |   |   |   |", line: 5, column: 0, refresh: true)
-        term.addStrTo(content: "Q W E R T Y U I O P", line: 12, column: 10)
-        term.addStrTo(content: "A S D F G H J K L", line: 13, column: 11)
-        term.addStrTo(content: "Z X C V B N M", line: 14, column: 12)
+        term.addStrTo(window: keyboardDisplay, content: "Q W E R T Y U I O P", line: 0, column: 0)
+        term.addStrTo(window: keyboardDisplay, content: "A S D F G H J K L", line: 1, column: 1)
+        term.addStrTo(window: keyboardDisplay, content: "Z X C V B N M", line: 2, column: 2, refresh: true)
     }
 
     func prompt(g: Int) -> String {
