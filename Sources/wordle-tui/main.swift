@@ -95,9 +95,12 @@ class WordleCurses {
         }
     }
 
-    // TODO: call updateStatus()
-    func close() {
-        term.addStrTo(content: "That's it! Any key to quit!", line: 17, column: 3);
+    func close(s: String? = nil) {
+        if let s = s {
+            updateStatus(s: s)
+        } else {
+            updateStatus(s: "That's it! (Any key to quit!)")
+        }
         term.refresh()
         getch()
         term.shutdown()
@@ -145,13 +148,12 @@ for guessCounter in 1...6 {
     game.updateGuessRowGuiWide(g: guessCounter, s: guessRow)
     if guessRow.matchesCorrectWord() {
         // TODO: Add fancy message here
-        // TODO: Try calling game.close()
-        game.updateStatus(s: "You got it!")
+        game.close(s: "You got it in \(guessCounter) guess\(guessCounter > 1 ? "es" : "")! (Any key to quit.)")
+        break
+    }
+    if guessCounter == 6 {
+        game.close(s: "The correct word was \(correctWord.uppercased()) (Any key to quit.)")
         break
     }
 }
-
-// TODO: Fix it so close() accepts a status message
-game.close()
-print("CORRECT WORD: \(correctWord.uppercased())")
 exit(EXIT_SUCCESS)
