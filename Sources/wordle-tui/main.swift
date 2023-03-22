@@ -19,6 +19,13 @@ class WordleCurses {
     let green: SCTColorPair
     let yellow: SCTColorPair
 
+    /// Bool represents whether the letter has been used in a guess
+    var usedLetters: [String:Bool] = ["A": false, "B": false, "C": false, "D": false,
+    "E": false, "F": false, "G": false, "H": false, "I": false, "J": false, "K": false,
+    "L": false, "M": false, "N": false, "O": false, "P": false, "Q": false, "R": false,
+    "S": false, "T": false, "U": false, "V": false, "W": false, "X": false, "Y": false,
+    "Z": false]
+
     init() {
         term = SwiftCursesTerm()
         term.refresh()
@@ -32,6 +39,18 @@ class WordleCurses {
         yellow = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.yellow)
     }
 
+    func updateKeyboardDisplay(c: String) {
+        usedLetters[c] = true
+        for (i, l) in "QWERTYUIOP".enumerated() {
+            if usedLetters[String(l)] ?? true {
+                term.setAttributes(window: keyboardDisplay, [TextAttribute.blink], colorPair: nil)
+            } else {
+                term.setAttributes(window: keyboardDisplay, [TextAttribute.normal], colorPair: nil)
+            }
+            term.addStrTo(window: keyboardDisplay, content: String(l), line: 0, column: i, refresh: true)
+        }
+        term.setAttributes(window: keyboardDisplay, [TextAttribute.normal], colorPair: nil)
+    }
 
     func updateGuessRow(g: Int, s: GuessRow) {
         var offset: Int = 4
@@ -53,11 +72,13 @@ class WordleCurses {
                 default:
                     break
             }
+            updateKeyboardDisplay(c: letter)
             term.addStrTo(window: guessesBoard, content: " \(letter) ", line: y, column: offset)
             term.setAttributes(window: guessesBoard, [TextAttribute.normal], colorPair: nil)
             offset += 4
         }
         term.refresh(window: guessesBoard)
+        term.refresh(window: keyboardDisplay)
     }
 
     func draw() {
@@ -68,9 +89,9 @@ class WordleCurses {
         term.addStrTo(window: guessesBoard, content: "4: |   |   |   |   |   |", line: 3, column: 0)
         term.addStrTo(window: guessesBoard, content: "5: |   |   |   |   |   |", line: 4, column: 0)
         term.addStrTo(window: guessesBoard, content: "6: |   |   |   |   |   |", line: 5, column: 0, refresh: true)
-        term.addStrTo(window: keyboardDisplay, content: "Q W E R T Y U I O P", line: 0, column: 0)
-        term.addStrTo(window: keyboardDisplay, content: "A S D F G H J K L", line: 1, column: 1)
-        term.addStrTo(window: keyboardDisplay, content: "Z X C V B N M", line: 2, column: 2, refresh: true)
+        // term.addStrTo(window: keyboardDisplay, content: "Q W E R T Y U I O P", line: 0, column: 0)
+        // term.addStrTo(window: keyboardDisplay, content: "A S D F G H J K L", line: 1, column: 1)
+        // term.addStrTo(window: keyboardDisplay, content: "Z X C V B N M", line: 2, column: 2, refresh: true)
     }
 
     func prompt(g: Int) -> String {
