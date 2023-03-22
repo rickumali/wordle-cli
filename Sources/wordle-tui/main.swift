@@ -33,7 +33,7 @@ class WordleCurses {
     }
 
 
-    func updateGuessRowGuiWide(g: Int, s: GuessRow) {
+    func updateGuessRow(g: Int, s: GuessRow) {
         var offset: Int = 4
         let y: Int = Int(g) - 1
         term.setAttributes(window: guessesBoard, [TextAttribute.normal], colorPair: nil)
@@ -145,7 +145,7 @@ for guessCounter in 1...6 {
     let guessRow = GuessRow(guess: guessString.uppercased())
     guessRow.updateRow(correctWord: correctWord.uppercased())
     prevGuessRows.append(guessRow)
-    game.updateGuessRowGuiWide(g: guessCounter, s: guessRow)
+    game.updateGuessRow(g: guessCounter, s: guessRow)
     if guessRow.matchesCorrectWord() {
         // TODO: Add fancy message here
         game.close(s: "You got it in \(guessCounter) guess\(guessCounter > 1 ? "es" : "")! (Any key to quit.)")
