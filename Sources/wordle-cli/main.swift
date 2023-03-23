@@ -80,10 +80,10 @@ for guessCounter in 1...6 {
             if wordleWords.valid(guess.lowercased()) {
                 goodInput = true
             } else {
-                print("Your word is not in my dictionary!")
+                game.updateStatus(s: "Your word is not in my dictionary!")
             }
         } else {
-            print("You need a five letter word!")
+            game.updateStatus(s: "You need a five letter word!")
         }
     } while !goodInput
     let guessRow = GuessRow(guess: guess.uppercased())
@@ -98,7 +98,7 @@ for guessCounter in 1...6 {
         break
     }
     if guessCounter == 6 {
-        print("The correct word was \(correctWord.uppercased())")
+        game.updateStatus(s: "The correct word was \(correctWord.uppercased())")
         break
     }
 }
