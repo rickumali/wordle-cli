@@ -34,11 +34,14 @@ class WordleLineMode {
     }
 
     func prompt(g: Int) -> String {
-        return ""
+        print("Guess (\(g) out of 6)?", terminator: " ")
+        return(readLine()!)
     }
 
     func updateStatus(s: String? = nil) {
-
+        if let s = s {
+            print(s)
+        }
     }
 
     func close(s: String? = nil) {
@@ -66,12 +69,11 @@ for guessCounter in 1...6 {
     goodInput = false
     // TODO: Consider making this repeat/while a function
     repeat {
-        print("Guess (\(guessCounter) out of 6)?", terminator: " ")
-        guess = readLine()!
+        guess = game.prompt(g: guessCounter)
         // TODO: Consider making "aeiou" the backdoor
         let backdoorNum = Int(guess) ?? 0
         if backdoorNum == -99 {
-            print("Pssst: \(correctWord.uppercased())")
+            game.updateStatus(s: "Pssst: \(correctWord.uppercased())")
             continue
         }
         if guess.count == 5 {
