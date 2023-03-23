@@ -1,5 +1,3 @@
-print("wordle-cli by Rick Umali")
-
 import Foundation
 import wordle
 
@@ -22,6 +20,32 @@ func corectWordMessage(guessCount: Int) {
     }
 }
 
+class WordleLineMode {
+    init() {
+        // Unused
+    }
+
+    func updateGuessRow(g: Int, s: GuessRow) {
+
+    }
+
+    func draw() {
+        print("wordle-cli (by Rick Umali)")
+    }
+
+    func prompt(g: Int) -> String {
+        return ""
+    }
+
+    func updateStatus(s: String? = nil) {
+
+    }
+
+    func close(s: String? = nil) {
+
+    }
+}
+
 var wordleWords = WordleWords()
 try wordleWords.load()
 
@@ -33,6 +57,10 @@ var goodInput: Bool
 var correctWord: String = wordleWords.getRandomCorrectWord()
 /// This variable contains previous guesses
 var prevGuessRows: [GuessRow] = []
+
+var game: WordleLineMode = WordleLineMode()
+
+game.draw()
 
 for guessCounter in 1...6 {
     goodInput = false
