@@ -25,8 +25,11 @@ class WordleLineMode {
         // Unused
     }
 
-    func updateGuessRow(g: Int, s: GuessRow) {
-
+    func drawNewGuess(g: [GuessRow]) {
+        for (c, r) in g.enumerated() {
+            print("\(c + 1):", terminator: " ")
+            print(r.row())
+        }
     }
 
     func draw() {
@@ -89,10 +92,7 @@ for guessCounter in 1...6 {
     let guessRow = GuessRow(guess: guess.uppercased())
     guessRow.updateRow(correctWord: correctWord.uppercased())
     prevGuessRows.append(guessRow)
-    for (c, r) in prevGuessRows.enumerated() {
-        print("\(c + 1):", terminator: " ")
-        print(r.row())
-    }
+    game.drawNewGuess(g: prevGuessRows)
     if guessRow.matchesCorrectWord() {
         corectWordMessage(guessCount: guessCounter)
         break
