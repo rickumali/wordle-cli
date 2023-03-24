@@ -33,11 +33,15 @@ class WordleCurses {
     }
 
 
-    func drawNewGuess(g: Int, s: GuessRow) {
+    func drawNewGuess(g: [GuessRow]) {
+        if g.count == 0 {
+            return
+        }
         var offset: Int = 4
-        let y: Int = Int(g) - 1
+        let y: Int = g.count - 1
+        let s: GuessRow = g.last!
         term.setAttributes(window: guessesBoard, [TextAttribute.normal], colorPair: nil)
-        term.addStrTo(window: guessesBoard, content: "\(g): |   |   |   |   |   |", line: y, column: 0)
+        term.addStrTo(window: guessesBoard, content: "\(y + 1): |   |   |   |   |   |", line: y, column: 0)
         for c in s.letterWithColor() {
             let (letter, color) = c
             switch(color) {
@@ -145,7 +149,7 @@ for guessCounter in 1...6 {
     let guessRow = GuessRow(guess: guessString.uppercased())
     guessRow.updateRow(correctWord: correctWord.uppercased())
     prevGuessRows.append(guessRow)
-    game.drawNewGuess(g: guessCounter, s: guessRow)
+    game.drawNewGuess(g: prevGuessRows)
     if guessRow.matchesCorrectWord() {
         // TODO: Add fancy message here
         game.close(s: "You got it in \(guessCounter) guess\(guessCounter > 1 ? "es" : "")! (Any key to quit.)")
