@@ -100,7 +100,7 @@ public class WordleCursesMode {
 
     public func close(s: String? = nil) {
         if let s = s {
-            updateStatus(s: s)
+            updateStatus(s: s + " (Any key to quit.)")
         } else {
             updateStatus(s: "That's it! (Any key to quit!)")
         }
