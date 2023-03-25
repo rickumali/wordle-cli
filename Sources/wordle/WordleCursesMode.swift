@@ -7,7 +7,7 @@
 import Foundation
 import SwiftCursesTerm
 
-public class WordleCursesMode {
+public class WordleCursesMode: GameView {
     let prompt_len = 15
     var term: SwiftCursesTerm
 

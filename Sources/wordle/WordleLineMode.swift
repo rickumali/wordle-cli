@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class WordleLineMode {
+public class WordleLineMode: GameView {
     public init() {
         // Unused
     }
