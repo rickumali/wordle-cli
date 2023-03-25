@@ -39,10 +39,8 @@ game.draw()
 
 for guessCounter in 1...6 {
     goodInput = false
-    // TODO: Consider making this repeat/while a function
     repeat {
         guess = game.prompt(g: guessCounter)
-        // TODO: Consider making "aeiou" the backdoor
         let backdoorNum = Int(guess) ?? 0
         if backdoorNum == -99 {
             game.updateStatus(s: "Pssst: \(correctWord.uppercased())")
