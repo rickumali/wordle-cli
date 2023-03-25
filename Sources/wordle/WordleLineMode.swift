@@ -33,7 +33,9 @@ public class WordleLineMode {
     }
 
     public func close(s: String? = nil) {
-
+        if let s = s {
+            print(s)
+        }
     }
 }
 
