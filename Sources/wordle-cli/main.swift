@@ -32,7 +32,8 @@ var correctWord: String = wordleWords.getRandomCorrectWord()
 /// This variable contains previous guesses
 var prevGuessRows: [GuessRow] = []
 
-var game: WordleLineMode = WordleLineMode()
+var game: GameView = WordleLineMode()
+// var game: GameView = WordleCursesMode()
 
 game.draw()
 
