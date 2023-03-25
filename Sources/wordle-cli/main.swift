@@ -20,38 +20,6 @@ func corectWordMessage(guessCount: Int) {
     }
 }
 
-class WordleLineMode {
-    init() {
-        // Unused
-    }
-
-    func drawNewGuess(g: [GuessRow]) {
-        for (c, r) in g.enumerated() {
-            print("\(c + 1):", terminator: " ")
-            print(r.row())
-        }
-    }
-
-    func draw() {
-        print("wordle-cli (by Rick Umali)")
-    }
-
-    func prompt(g: Int) -> String {
-        print("Guess (\(g) out of 6)?", terminator: " ")
-        return(readLine()!)
-    }
-
-    func updateStatus(s: String? = nil) {
-        if let s = s {
-            print(s)
-        }
-    }
-
-    func close(s: String? = nil) {
-
-    }
-}
-
 var wordleWords = WordleWords()
 try wordleWords.load()
 
