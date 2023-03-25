@@ -62,11 +62,13 @@ for guessCounter in 1...6 {
     prevGuessRows.append(guessRow)
     game.drawNewGuess(g: prevGuessRows)
     if guessRow.matchesCorrectWord() {
-        corectWordMessage(guessCount: guessCounter)
+        // TODO: Add fancy message here
+        // corectWordMessage(guessCount: guessCounter)
+        game.close(s: "You got it in \(guessCounter) guess\(guessCounter > 1 ? "es" : "")!")
         break
     }
     if guessCounter == 6 {
-        game.updateStatus(s: "The correct word was \(correctWord.uppercased())")
+        game.close(s: "The correct word was \(correctWord.uppercased())")
         break
     }
 }
