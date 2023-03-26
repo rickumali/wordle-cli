@@ -33,7 +33,18 @@ var correctWord: String = wordleWords.getRandomCorrectWord()
 var prevGuessRows: [GuessRow] = []
 
 var gameView: GameView = WordleLineMode()
-// var game: GameView = WordleCursesMode()
+
+if CommandLine.argc == 2 {
+    if CommandLine.arguments[1] == "--line-mode" {
+    } else if CommandLine.arguments[1] == "--curses-mode" {
+        gameView = WordleCursesMode()
+    } else {
+        gameView.close(s: "Usage: wordle-cli [--line-mode|--curses-mode]")
+        exit(EXIT_FAILURE)
+    }
+} else if CommandLine.argc == 1 {
+    gameView = WordleCursesMode()
+}
 
 gameView.draw()
 
