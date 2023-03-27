@@ -32,10 +32,11 @@ var correctWord: String = wordleWords.getRandomCorrectWord()
 /// This variable contains previous guesses
 var prevGuessRows: [GuessRow] = []
 
-var gameView: GameView = WordleLineMode()
+var gameView: GameView!
 
 if CommandLine.argc == 2 {
     if CommandLine.arguments[1] == "--line-mode" {
+        gameView = WordleLineMode()
     } else if CommandLine.arguments[1] == "--curses-mode" {
         gameView = WordleCursesMode()
     } else {
