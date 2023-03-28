@@ -9,6 +9,7 @@ public class WordleGameModel {
     var guesses: [GuessRow]
     var correctWord: String
     var usedLetters: [String] // TODO: Populate for dimmed keyboard
+    let allowedGuesses = 6
 
     public init(correctWord s: String) {
         correctWord = s
@@ -24,7 +25,7 @@ public class WordleGameModel {
         if s.matchesCorrectWord() {
             return true
         }
-        if guesses.count == 6 {
+        if guesses.count == allowedGuesses {
             return true
         }
         return false
