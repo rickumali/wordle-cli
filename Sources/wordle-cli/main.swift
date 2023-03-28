@@ -1,25 +1,6 @@
 import Foundation
 import wordle
 
-func corectWordMessage(guessCount: Int) {
-    switch guessCount {
-    case 1:
-        print("Amazing! You got in 1 guess!")
-    case 2:
-        print("Wow! Two guesses!")
-    case 3:
-        print("Great! You got in 3 guesses!")
-    case 4:
-        print("Fantastic! Four guesses!")
-    case 5:
-        print("Good work! Five guesses.")
-    case 6:
-        print("Whew! On the last (6th) guess!")
-    default:
-        print("You got it!")
-    }
-}
-
 var wordleWords = WordleWords()
 try wordleWords.load()
 
