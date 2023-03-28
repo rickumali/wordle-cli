@@ -37,6 +37,7 @@ public class GuessRow {
         return letterStats
     }
 
+    // TODO: Consider putting updateRow() inside of matchesCorrectWord function
     public func updateRow(correctWord s: String) {
         var remainingLetters: [Character] = []
         for (i, c) in guessLetters.enumerated() {
@@ -60,6 +61,9 @@ public class GuessRow {
         }
     }
 
+    /// matchesCorrectWord() - Returns TRUE if the GuessRow
+    /// matches the correct word, otherwise FALSE. The updateRow()
+    /// function must be called before this gives an accurate value
     public func matchesCorrectWord() -> Bool {
         for c in guessLetters {
             if !c.inCorrectSpot {
