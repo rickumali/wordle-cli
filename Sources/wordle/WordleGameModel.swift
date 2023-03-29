@@ -21,14 +21,20 @@ public class WordleGameModel {
         if guesses.count == 0 {
             return false
         }
-        let s: GuessRow = guesses.last!
-        if s.matchesCorrectWord() {
+        if isWon() {
             return true
         }
         if guesses.count == allowedGuesses {
             return true
         }
         return false
+    }
+
+    public func isWon() -> Bool {
+        let s: GuessRow = guesses.last!
+        if s.matchesCorrectWord() {
+            return true
+        }
     }
 
     public func addNewGuess(_ s: String) {
