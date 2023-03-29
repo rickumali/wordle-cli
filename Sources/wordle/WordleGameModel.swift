@@ -35,6 +35,7 @@ public class WordleGameModel {
         if s.matchesCorrectWord() {
             return true
         }
+        return false
     }
 
     public func addNewGuess(_ s: String) {
