@@ -40,7 +40,7 @@ for guessCounter in 1...6 {
             continue
         }
         if guess.count == 5 {
-            if wordleWords.valid(guess.lowercased()) {
+            if wordleWords.valid(guess) {
                 goodInput = true
             } else {
                 gameView.updateStatus(s: "Your word is not in my dictionary!")

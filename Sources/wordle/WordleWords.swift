@@ -31,6 +31,6 @@ public class WordleWords {
     }
 
     public func valid(_ w: String) -> Bool {
-        return self.words.contains(w)
+        return self.words.contains(w.lowercased())
     }
 }
