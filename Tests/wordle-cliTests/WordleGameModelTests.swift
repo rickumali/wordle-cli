@@ -4,6 +4,8 @@
 //  Created by Rick Umali on 3/28/23.
 
 import XCTest
+@testable
+import wordle
 
 class WordleGameModelTests: XCTestCase {
 
@@ -13,6 +15,11 @@ class WordleGameModelTests: XCTestCase {
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+
+    func testCreateWordleGameModel() {
+        let game = WordleGameModel(correctWord: "taser")
+        XCTAssertEqual(game.correctWord, "taser")
     }
 
     func testExample() throws {
