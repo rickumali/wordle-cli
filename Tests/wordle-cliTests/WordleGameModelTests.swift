@@ -20,6 +20,9 @@ class WordleGameModelTests: XCTestCase {
     func testCreateWordleGameModel() {
         let game = WordleGameModel(correctWord: "taser")
         XCTAssertEqual(game.correctWord, "taser")
+        XCTAssertEqual(game.guesses.count, 0)
+        XCTAssertFalse(game.isFinished())
+        XCTAssertFalse(game.isWon())
     }
 
     func testExample() throws {
