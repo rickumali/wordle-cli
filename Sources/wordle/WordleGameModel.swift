@@ -31,8 +31,11 @@ public class WordleGameModel {
     }
 
     public func isWon() -> Bool {
-        let s: GuessRow = guesses.last!
-        if s.matchesCorrectWord() {
+        let s: GuessRow? = guesses.last
+        if s == nil {
+            return false
+        }
+        if s!.matchesCorrectWord() {
             return true
         }
         return false
