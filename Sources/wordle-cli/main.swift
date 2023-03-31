@@ -21,7 +21,7 @@ if CommandLine.argc == 2 {
     } else if CommandLine.arguments[1] == "--curses-mode" {
         gameView = WordleCursesMode()
     } else {
-        gameView.close(s: "Usage: wordle-cli [--line-mode|--curses-mode]")
+        print("Usage: wordle-cli [--line-mode|--curses-mode]")
         exit(EXIT_FAILURE)
     }
 } else if CommandLine.argc == 1 {
