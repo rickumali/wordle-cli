@@ -25,4 +25,13 @@ class WordleGameModelTests: XCTestCase {
         XCTAssertFalse(game.isWon())
     }
 
+    func testAromaGame() {
+        let game = WordleGameModel(correctWord: "aroma")
+        XCTAssertFalse(game.isFinished())
+        XCTAssertFalse(game.isWon())
+        game.addNewGuess("cured")
+        XCTAssertEqual(game.guesses.last!.row(), "| C | U |-R-| E | D |")
+        XCTAssertEqual(game.guesses.count, 1)
+        // Continue with remaining game
+    }
 }
