@@ -7,9 +7,18 @@ import Foundation
 
 public class WordleGameModel {
     var guesses: [GuessRow]
+    public var guessesAry: [GuessRow] {
+        return guesses
+    }
     var correctWord: String
     var usedLetters: [String] // TODO: Populate for dimmed keyboard
     let allowedGuesses = 6
+    public var promptGuessCount: Int {
+        return guesses.count + 1
+    }
+    public var guessCount: Int {
+        return guesses.count
+    }
 
     public init(correctWord s: String) {
         correctWord = s
