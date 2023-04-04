@@ -10,8 +10,6 @@ var guess: String
 var goodInput: Bool
 /// This variable contains the correct word
 var correctWord: String = wordleWords.getRandomCorrectWord()
-/// This variable contains previous guesses
-var prevGuessRows: [GuessRow] = []
 
 var gameView: GameView!
 
@@ -28,12 +26,15 @@ if CommandLine.argc == 2 {
     gameView = WordleCursesMode()
 }
 
+/// This variable holds the Game Model
+var game: WordleGameModel = WordleGameModel(correctWord: correctWord)
+
 gameView.draw()
 
-for guessCounter in 1...6 {
+while !game.isFinished() {
     goodInput = false
     repeat {
-        guess = gameView.prompt(g: guessCounter)
+        guess = gameView.prompt(g: game.promptGuessCount)
         let backdoorNum = Int(guess) ?? 0
         if backdoorNum == -99 {
             gameView.updateStatus(s: "Pssst: \(correctWord.uppercased())")
@@ -49,18 +50,13 @@ for guessCounter in 1...6 {
             gameView.updateStatus(s: "You need a five letter word!")
         }
     } while !goodInput
-    let guessRow = GuessRow(guess: guess.uppercased())
-    guessRow.updateRow(correctWord: correctWord.uppercased())
-    prevGuessRows.append(guessRow)
-    gameView.drawNewGuess(g: prevGuessRows)
-    if guessRow.matchesCorrectWord() {
-        // TODO: Add fancy message here
-        // corectWordMessage(guessCount: guessCounter)
-        gameView.close(s: "You got it in \(guessCounter) guess\(guessCounter > 1 ? "es" : "")!")
-        break
-    }
-    if guessCounter == 6 {
-        gameView.close(s: "The correct word was \(correctWord.uppercased())")
-        break
-    }
+    game.addNewGuess(guess)
+    gameView.drawNewGuess(g: game.guessesAry)
+}
+if (game.isWon()) {
+    // TODO: Add fancy message here
+    // corectWordMessage(guessCount: guessCounter)
+    gameView.close(s: "You got it in \(game.guessCount) guess\((game.guessCount) > 1 ? "es" : "")!")
+} else {
+    gameView.close(s: "The correct word was \(correctWord.uppercased())")
 }
