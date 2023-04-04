@@ -32,6 +32,20 @@ class WordleGameModelTests: XCTestCase {
         game.addNewGuess("cured")
         XCTAssertEqual(game.guesses.last!.row(), "| C | U |-R-| E | D |")
         XCTAssertEqual(game.guesses.count, 1)
-        // Continue with remaining game
+        XCTAssertFalse(game.isFinished())
+        XCTAssertFalse(game.isWon())
+        game.addNewGuess("walks")
+        XCTAssertEqual(game.guesses.last!.row(), "| W |-A-| L | K | S |")
+        XCTAssertEqual(game.guesses.count, 2)
+        XCTAssertFalse(game.isFinished())
+        XCTAssertFalse(game.isWon())
+        game.addNewGuess("tramp")
+        XCTAssertEqual(game.guesses.last!.row(), "| T |+R+|-A-|+M+| P |")
+        XCTAssertEqual(game.guesses.count, 3)
+        game.addNewGuess("aroma")
+        XCTAssertEqual(game.guesses.last!.row(), "|+A+|+R+|+O+|+M+|+A+|")
+        XCTAssertEqual(game.guesses.count, 4)
+        XCTAssertTrue(game.isFinished())
+        XCTAssertTrue(game.isWon())
     }
 }
