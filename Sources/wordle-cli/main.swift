@@ -54,9 +54,7 @@ while !game.isFinished() {
     gameView.drawNewGuess(g: game.guessesAry)
 }
 if (game.isWon()) {
-    // TODO: Add fancy message here
-    // corectWordMessage(guessCount: guessCounter)
-    gameView.close(s: "You got it in \(game.guessCount) guess\(game.guessCount > 1 ? "es" : "")!")
+    gameView.close(s: game.endMessage())
 } else {
     gameView.close(s: "The correct word was \(correctWord.uppercased())")
 }
