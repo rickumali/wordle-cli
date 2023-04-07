@@ -10,6 +10,7 @@ import SwiftCursesTerm
 public class WordleCursesMode: GameView {
     let prompt_len = 15
     var term: SwiftCursesTerm
+    var keyboardRow: [String] = ["Q W E R T Y U I O P", "A S D F G H J K L", "Z X C V B N M"]
 
     let eightySpaces: String
     var game_title: SCTWindowId
@@ -71,9 +72,14 @@ public class WordleCursesMode: GameView {
         term.addStrTo(window: guessesBoard, content: "4: |   |   |   |   |   |", line: 3, column: 0)
         term.addStrTo(window: guessesBoard, content: "5: |   |   |   |   |   |", line: 4, column: 0)
         term.addStrTo(window: guessesBoard, content: "6: |   |   |   |   |   |", line: 5, column: 0, refresh: true)
-        term.addStrTo(window: keyboardDisplay, content: "Q W E R T Y U I O P", line: 0, column: 0)
-        term.addStrTo(window: keyboardDisplay, content: "A S D F G H J K L", line: 1, column: 1)
-        term.addStrTo(window: keyboardDisplay, content: "Z X C V B N M", line: 2, column: 2, refresh: true)
+        drawKeyboard();
+    }
+
+    func drawKeyboard() {
+        for (i, keyrow) in keyboardRow.enumerated() {
+            term.addStrTo(window: keyboardDisplay, content: keyrow, line: i, column: i)
+        }
+        term.refresh(window: keyboardDisplay)
     }
 
     public func prompt(g: Int) -> String {
