@@ -1,0 +1,27 @@
++D+ - in word and in correct spot
+-D- - in word but not in correct spot
+_D_ - played letter == not in word
+
+CURED  (correct word: AROMA)
+
+       Q  W _E_-R- T  Y _U_ I  O  P
+        A  S _D_ F  G  H  J  K  L
+         Z  X _C_ V  B  N  M
+
+WALKS (correct word: AROMA)
+
+       Q _W__E_-R- T  Y _U_ I  O  P
+       -A-_S__D_ F  G  H  J _K__L_
+         Z  X _C_ V  B  N  M
+
+TRAMP (correct word: AROMA)
+
+       Q  W _E_+R+_T_ Y _U_ I  O _P_
+       -A-_S__D_ F  G  H  J _K__L_
+         Z  X _C_ V  B  N +M+
+
+AROMA (correct word: AROMA)
+
+       Q  W _E_+R+_T_ Y _U_ I +O+_P_
+       +A+_S__D_ F  G  H  J _K__L_
+         Z  X _C_ V  B  N +M+
