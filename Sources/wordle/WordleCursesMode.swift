@@ -10,7 +10,7 @@ import SwiftCursesTerm
 public class WordleCursesMode: GameView {
     let prompt_len = 15
     var term: SwiftCursesTerm
-    var keyboardRow: [String] = ["Q W E R T Y U I O P", "A S D F G H J K L", "Z X C V B N M"]
+    var keyboardRow: [String] = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"]
 
     let eightySpaces: String
     var game_title: SCTWindowId
@@ -27,7 +27,7 @@ public class WordleCursesMode: GameView {
         eightySpaces = String(repeatElement(" ", count: 80))
         game_title = term.newWindow(height: 1, width: 40, line: 3, column: 3)
         guessesBoard = term.newWindow(height: 6, width: 40, line: 5, column: 8)
-        keyboardDisplay = term.newWindow(height: 3, width: 40, line: 12, column: 7)
+        keyboardDisplay = term.newWindow(height: 3, width: 40, line: 12, column: 5)
 
         green = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.green)
         yellow = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.yellow)
@@ -78,8 +78,13 @@ public class WordleCursesMode: GameView {
     }
 
     func drawKeyboard() {
+        // TODO: Pass in GameModel and examine usedLettersAry
         for (i, keyrow) in keyboardRow.enumerated() {
-            term.addStrTo(window: keyboardDisplay, content: keyrow, line: i, column: i)
+            var kString: String = ""
+            for k in keyrow {
+                kString += " \(k) "
+            }
+            term.addStrTo(window: keyboardDisplay, content: kString, line: i, column: i)
         }
         term.refresh(window: keyboardDisplay)
     }
