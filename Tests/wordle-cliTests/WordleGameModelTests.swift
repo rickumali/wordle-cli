@@ -56,7 +56,7 @@ class WordleGameModelTests: XCTestCase {
         XCTAssertFalse(game.isFinished())
         XCTAssertFalse(game.isWon())
         XCTAssertEqual(game.promptGuessCount, 1)
-        game.addNewGuess("grail") // Guess 1
+        game.addNewGuess("pants") // Guess 1
         XCTAssertEqual(game.guesses.last!.row(), "| G |+R+|+A+| I | L |")
         XCTAssertFalse(game.isFinished())
         XCTAssertFalse(game.isWon())
@@ -88,7 +88,7 @@ class WordleGameModelTests: XCTestCase {
         XCTAssertFalse(game.isFinished())
         XCTAssertFalse(game.isWon())
         XCTAssertEqual(game.promptGuessCount, 1)
-        game.addNewGuess("grail") // Guess 1
+        game.addNewGuess("pants") // Guess 1
         XCTAssertEqual(game.guesses.last!.row(), "| G |+R+|+A+| I | L |")
         XCTAssertFalse(game.isFinished())
         XCTAssertFalse(game.isWon())
@@ -98,5 +98,19 @@ class WordleGameModelTests: XCTestCase {
         game.addNewGuess("track") // Guess 2
         XCTAssertNotNil(game.usedLettersAry.firstIndex(of: "T"))
         XCTAssertEqual(game.usedLettersAry.count, 8)
+    }
+
+    func testUsedLetters() {
+        let game = WordleGameModel(correctWord: "aroma")
+        game.addNewGuess("pants") // Guess 1
+        game.addNewGuess("pants") // Guess 2
+        game.addNewGuess("pants") // Guess 3
+        game.addNewGuess("pants") // Guess 4
+        game.addNewGuess("pants") // Guess 5
+        game.addNewGuess("pants") // Guess 6
+        XCTAssertTrue(game.isFinished())
+        XCTAssertFalse(game.isWon())
+        XCTAssertEqual(game.promptGuessCount, 7)
+        XCTAssertEqual(game.usedLettersAry.count, 5)
     }
 }
