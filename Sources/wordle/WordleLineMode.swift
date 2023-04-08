@@ -10,7 +10,8 @@ public class WordleLineMode: GameView {
         // Unused
     }
 
-    public func drawNewGuess(g: [GuessRow]) {
+    public func drawNewGuess(game: WordleGameModel) {
+        let g: [GuessRow] = game.guessesAry
         for (c, r) in g.enumerated() {
             print("\(c + 1):", terminator: " ")
             print(r.row())

@@ -33,7 +33,8 @@ public class WordleCursesMode: GameView {
         yellow = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.yellow)
     }
 
-    public func drawNewGuess(g: [GuessRow]) {
+    public func drawNewGuess(game: WordleGameModel) {
+        let g: [GuessRow] = game.guessesAry
         if g.count == 0 {
             return
         }
@@ -62,6 +63,7 @@ public class WordleCursesMode: GameView {
             offset += 4
         }
         term.refresh(window: guessesBoard)
+        drawKeyboard()
     }
 
     public func draw() {

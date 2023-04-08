@@ -51,7 +51,7 @@ while !game.isFinished() {
         }
     } while !goodInput
     game.addNewGuess(guess)
-    gameView.drawNewGuess(g: game.guessesAry)
+    gameView.drawNewGuess(game: game)
 }
 if (game.isWon()) {
     gameView.close(s: game.endMessage())
