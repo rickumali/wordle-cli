@@ -27,7 +27,7 @@ public class WordleCursesMode: GameView {
         eightySpaces = String(repeatElement(" ", count: 80))
         game_title = term.newWindow(height: 1, width: 40, line: 3, column: 3)
         guessesBoard = term.newWindow(height: 6, width: 40, line: 5, column: 8)
-        keyboardDisplay = term.newWindow(height: 3, width: 40, line: 12, column: 10)
+        keyboardDisplay = term.newWindow(height: 3, width: 40, line: 12, column: 7)
 
         green = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.green)
         yellow = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.yellow)
