@@ -12,6 +12,9 @@ public class WordleGameModel {
     }
     var correctWord: String
     var usedLetters: [String] // TODO: Populate for dimmed keyboard
+    public var usedLettersAry: [String] {
+        return usedLetters
+    }
     let allowedGuesses = 6
     public var promptGuessCount: Int {
         return guesses.count + 1
@@ -54,6 +57,11 @@ public class WordleGameModel {
         let guessRow = GuessRow(guess: s.uppercased())
         guessRow.updateRow(correctWord: correctWord.uppercased())
         guesses.append(guessRow)
+        for c in s.uppercased() {
+            if (usedLetters.firstIndex(of: String(c)) == nil) {
+                usedLetters.append(String(c))
+            }
+        }
     }
 
     public func endMessage() -> String {

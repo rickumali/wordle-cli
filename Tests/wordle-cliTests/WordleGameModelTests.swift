@@ -82,4 +82,21 @@ class WordleGameModelTests: XCTestCase {
         XCTAssertEqual(game.promptGuessCount, 7)
         XCTAssertEqual(game.guessCount, 6)
     }
+
+    func testKeyboard() {
+        let game = WordleGameModel(correctWord: "craze")
+        XCTAssertFalse(game.isFinished())
+        XCTAssertFalse(game.isWon())
+        XCTAssertEqual(game.promptGuessCount, 1)
+        game.addNewGuess("grail") // Guess 1
+        XCTAssertEqual(game.guesses.last!.row(), "| G |+R+|+A+| I | L |")
+        XCTAssertFalse(game.isFinished())
+        XCTAssertFalse(game.isWon())
+        XCTAssertEqual(game.promptGuessCount, 2)
+        XCTAssertNotNil(game.usedLettersAry.firstIndex(of: "G"))
+        XCTAssertNil(game.usedLettersAry.firstIndex(of: "Z"))
+        game.addNewGuess("track") // Guess 2
+        XCTAssertNotNil(game.usedLettersAry.firstIndex(of: "T"))
+        XCTAssertEqual(game.usedLettersAry.count, 8)
+    }
 }
