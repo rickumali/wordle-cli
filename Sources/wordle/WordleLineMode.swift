@@ -6,12 +6,14 @@
 import Foundation
 
 public class WordleLineMode: GameView {
-    public init() {
-        // Unused
+    var game: WordleGameModel
+
+    public init(game: WordleGameModel) {
+        self.game = game
     }
 
-    public func drawNewGuess(game: WordleGameModel) {
-        let g: [GuessRow] = game.guessesAry
+    public func drawNewGuess() {
+        let g: [GuessRow] = self.game.guessesAry
         for (c, r) in g.enumerated() {
             print("\(c + 1):", terminator: " ")
             print(r.row())

@@ -11,23 +11,23 @@ var goodInput: Bool
 /// This variable contains the correct word
 var correctWord: String = wordleWords.getRandomCorrectWord()
 
+/// This variable holds the Game Model
+var game: WordleGameModel = WordleGameModel(correctWord: correctWord)
+
 var gameView: GameView!
 
 if CommandLine.argc == 2 {
     if CommandLine.arguments[1] == "--line-mode" {
-        gameView = WordleLineMode()
+        gameView = WordleLineMode(game: game)
     } else if CommandLine.arguments[1] == "--curses-mode" {
-        gameView = WordleCursesMode()
+        gameView = WordleCursesMode(game: game)
     } else {
         print("Usage: wordle-cli [--line-mode|--curses-mode]")
         exit(EXIT_FAILURE)
     }
 } else if CommandLine.argc == 1 {
-    gameView = WordleCursesMode()
+    gameView = WordleCursesMode(game: game)
 }
-
-/// This variable holds the Game Model
-var game: WordleGameModel = WordleGameModel(correctWord: correctWord)
 
 gameView.draw()
 
@@ -51,7 +51,7 @@ while !game.isFinished() {
         }
     } while !goodInput
     game.addNewGuess(guess)
-    gameView.drawNewGuess(game: game)
+    gameView.drawNewGuess()
 }
 if (game.isWon()) {
     gameView.close(s: game.endMessage())

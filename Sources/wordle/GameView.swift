@@ -6,8 +6,9 @@
 import Foundation
 
 public protocol GameView {
+    // init(game: WordleGameView)
     func draw()
-    func drawNewGuess(game: WordleGameModel)
+    func drawNewGuess()
     func prompt(g: Int) -> String
     func updateStatus(s: String?)
     func close(s: String?)

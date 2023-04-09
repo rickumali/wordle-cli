@@ -20,7 +20,11 @@ public class WordleCursesMode: GameView {
     let green: SCTColorPair
     let yellow: SCTColorPair
 
-    public init() {
+    var game: WordleGameModel
+
+    public init(game: WordleGameModel) {
+        self.game = game
+
         term = SwiftCursesTerm()
         term.refresh()
 
@@ -33,8 +37,8 @@ public class WordleCursesMode: GameView {
         yellow = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.yellow)
     }
 
-    public func drawNewGuess(game: WordleGameModel) {
-        let g: [GuessRow] = game.guessesAry
+    public func drawNewGuess() {
+        let g: [GuessRow] = self.game.guessesAry
         if g.count == 0 {
             return
         }
