@@ -82,11 +82,14 @@ public class WordleCursesMode: GameView {
     }
 
     func drawKeyboard() {
-        // TODO: Pass in GameModel and examine usedLettersAry
         for (i, keyrow) in keyboardRow.enumerated() {
             var kString: String = ""
             for k in keyrow {
-                kString += " \(k) "
+                if (self.game.usedLettersAry.firstIndex(of: String(k)) == nil) {
+                    kString += " \(k) "
+                } else {
+                    kString += "_\(k)_"
+                }
             }
             term.addStrTo(window: keyboardDisplay, content: kString, line: i, column: i)
         }
