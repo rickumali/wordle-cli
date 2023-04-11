@@ -19,6 +19,7 @@ public class WordleCursesMode: GameView {
 
     let green: SCTColorPair
     let yellow: SCTColorPair
+    let white: SCTColorPair
 
     var game: WordleGameModel
 
@@ -35,6 +36,7 @@ public class WordleCursesMode: GameView {
 
         green = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.green)
         yellow = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.yellow)
+        white = term.defineColorPair(foreground: CursesColor.black, background: CursesColor.white)
     }
 
     public func drawNewGuess() {
@@ -82,16 +84,21 @@ public class WordleCursesMode: GameView {
     }
 
     func drawKeyboard() {
+        let characterOffset = 3
         for (row, keyrow) in keyboardRow.enumerated() {
-            var kString: String = ""
             var offset: Int = 0
             for k in keyrow {
+                var kString: String = ""
+                // if k in GuessRow
                 if (self.game.usedLettersAry.firstIndex(of: String(k)) == nil) {
-                    kString += " \(k) "
+                    term.setAttributes(window: keyboardDisplay, [TextAttribute.normal], colorPair: nil)
                 } else {
-                    kString += "_\(k)_"
+                    term.setAttributes(window: keyboardDisplay, [], colorPair: white)
                 }
+                kString += " \(k) "
                 term.addStrTo(window: keyboardDisplay, content: kString, line: row, column: row + offset)
+                term.setAttributes(window: keyboardDisplay, [TextAttribute.normal], colorPair: nil)
+                offset += characterOffset
             }
         }
         term.refresh(window: keyboardDisplay)
