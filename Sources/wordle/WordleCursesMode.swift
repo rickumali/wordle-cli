@@ -82,16 +82,17 @@ public class WordleCursesMode: GameView {
     }
 
     func drawKeyboard() {
-        for (i, keyrow) in keyboardRow.enumerated() {
+        for (row, keyrow) in keyboardRow.enumerated() {
             var kString: String = ""
+            var offset: Int = 0
             for k in keyrow {
                 if (self.game.usedLettersAry.firstIndex(of: String(k)) == nil) {
                     kString += " \(k) "
                 } else {
                     kString += "_\(k)_"
                 }
+                term.addStrTo(window: keyboardDisplay, content: kString, line: row, column: row + offset)
             }
-            term.addStrTo(window: keyboardDisplay, content: kString, line: i, column: i)
         }
         term.refresh(window: keyboardDisplay)
     }
