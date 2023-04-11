@@ -11,7 +11,7 @@ public class WordleGameModel {
         return guesses
     }
     var correctWord: String
-    var usedLetters: [String] // TODO: Populate for dimmed keyboard
+    var usedLetters: [String]
     public var usedLettersAry: [String] {
         return usedLetters
     }
