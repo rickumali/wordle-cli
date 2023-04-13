@@ -83,18 +83,54 @@ public class WordleCursesMode: GameView {
         drawKeyboard();
     }
 
+    func isLetterInLastGuess(_ k: String) -> Bool {
+        if self.game.guessesAry.count == 0 {
+            return false
+        }
+        for c in self.game.guessesAry.last!.letterWithColor() {
+            let (letter, color) = c
+            if (letter == String(k)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    func toBeDetermined(_ k: String) -> (String, String) {
+        for c in self.game.guessesAry.last!.letterWithColor() {
+            let (letter, color) = c
+            if (letter == String(k)) {
+                switch(color) {
+                    case "NONE":
+                        term.setAttributes(window: keyboardDisplay, [TextAttribute.normal], colorPair: white)
+                        break
+                    case "GREEN":
+                        term.setAttributes(window: keyboardDisplay, [], colorPair: green)
+                        break
+                    case "YELLOW":
+                        term.setAttributes(window: keyboardDisplay, [], colorPair: yellow)
+                        break
+                    default:
+                        break
+                }
+            }
+        }
+        return (k, "WHITE")
+    }
+
     func drawKeyboard() {
         let characterOffset = 3
         for (row, keyrow) in keyboardRow.enumerated() {
             var offset: Int = 0
             for k in keyrow {
-                var kString: String = ""
-                // if k in GuessRow
-                if (self.game.usedLettersAry.firstIndex(of: String(k)) == nil) {
-                    term.setAttributes(window: keyboardDisplay, [TextAttribute.normal], colorPair: nil)
-                } else {
+                // keyrow = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"]
+                if (isLetterInLastGuess(String(k))) {
+                    let (letter, color) = toBeDetermined(String(k))
                     term.setAttributes(window: keyboardDisplay, [], colorPair: white)
+                } else {
+                    term.setAttributes(window: keyboardDisplay, [TextAttribute.normal], colorPair: nil)
                 }
+                var kString: String = ""
                 kString += " \(k) "
                 term.addStrTo(window: keyboardDisplay, content: kString, line: row, column: row + offset)
                 term.setAttributes(window: keyboardDisplay, [TextAttribute.normal], colorPair: nil)
