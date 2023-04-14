@@ -83,19 +83,6 @@ public class WordleCursesMode: GameView {
         drawKeyboard();
     }
 
-    func isLetterInLastGuess(_ k: String) -> Bool {
-        if self.game.guessesAry.count == 0 {
-            return false
-        }
-        for c in self.game.guessesAry.last!.letterWithColor() {
-            let (letter, color) = c
-            if (letter == String(k)) {
-                return true
-            }
-        }
-        return false
-    }
-
     func toBeDetermined(_ k: String) -> (String, String) {
         for c in self.game.guessesAry.last!.letterWithColor() {
             let (letter, color) = c
@@ -124,7 +111,7 @@ public class WordleCursesMode: GameView {
             var offset: Int = 0
             for k in keyrow {
                 // keyrow = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"]
-                if (isLetterInLastGuess(String(k))) {
+                if (self.game.usedLettersAry.firstIndex(of: String(k)) != nil) {
                     let (letter, color) = toBeDetermined(String(k))
                     term.setAttributes(window: keyboardDisplay, [], colorPair: white)
                 } else {
