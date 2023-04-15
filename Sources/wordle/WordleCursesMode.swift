@@ -83,26 +83,28 @@ public class WordleCursesMode: GameView {
         drawKeyboard();
     }
 
-    func toBeDetermined(_ k: String) -> (String, String) {
-        for c in self.game.guessesAry.last!.letterWithColor() {
-            let (letter, color) = c
-            if (letter == String(k)) {
-                switch(color) {
-                    case "NONE":
-                        term.setAttributes(window: keyboardDisplay, [TextAttribute.normal], colorPair: white)
-                        break
-                    case "GREEN":
-                        term.setAttributes(window: keyboardDisplay, [], colorPair: green)
-                        break
-                    case "YELLOW":
-                        term.setAttributes(window: keyboardDisplay, [], colorPair: yellow)
-                        break
-                    default:
-                        break
+    func getLatestColorForLetter(_ k: String) -> String {
+        if (self.game.guessesAry.count == 0) {
+            return "WHITE"
+        }
+        for g in self.game.guessesAry.reversed() {
+            for c in g.letterWithColor() {
+                let (letter, color) = c
+                if (letter == String(k)) {
+                    switch(color) {
+                        case "NONE":
+                            return "WHITE"
+                        case "GREEN":
+                            return "GREEN"
+                        case "YELLOW":
+                            return "YELLOW"
+                        default:
+                            break
+                    }
                 }
             }
         }
-        return (k, "WHITE")
+        return "WHITE"
     }
 
     func drawKeyboard() {
@@ -110,15 +112,26 @@ public class WordleCursesMode: GameView {
         for (row, keyrow) in keyboardRow.enumerated() {
             var offset: Int = 0
             for k in keyrow {
-                // keyrow = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"]
                 if (self.game.usedLettersAry.firstIndex(of: String(k)) != nil) {
-                    let (letter, color) = toBeDetermined(String(k))
-                    term.setAttributes(window: keyboardDisplay, [], colorPair: white)
+                    let color = getLatestColorForLetter(String(k))
+                    switch(color) {
+                        case "NONE":
+                            term.setAttributes(window: keyboardDisplay, [], colorPair: white)
+                            break
+                        case "GREEN":
+                            term.setAttributes(window: keyboardDisplay, [], colorPair: green)
+                            break
+                        case "YELLOW":
+                            term.setAttributes(window: keyboardDisplay, [], colorPair: yellow)
+                            break
+                        default:
+                            term.setAttributes(window: keyboardDisplay, [], colorPair: white)
+                            break
+                    }
                 } else {
                     term.setAttributes(window: keyboardDisplay, [TextAttribute.normal], colorPair: nil)
                 }
-                var kString: String = ""
-                kString += " \(k) "
+                let kString: String = " \(k) "
                 term.addStrTo(window: keyboardDisplay, content: kString, line: row, column: row + offset)
                 term.setAttributes(window: keyboardDisplay, [TextAttribute.normal], colorPair: nil)
                 offset += characterOffset
