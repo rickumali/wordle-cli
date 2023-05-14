@@ -920,7 +920,6 @@ atule
 atune
 atwin
 atypy
-aubin
 aucht
 audad
 audio
@@ -930,8 +929,6 @@ auger
 auget
 aught
 augur
-aulae
-aulas
 aulic
 auloi
 aulos
@@ -1032,7 +1029,6 @@ axmen
 axoid
 axone
 axons
-ayahs
 ayelp
 ayens
 ayins
