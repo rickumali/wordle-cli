@@ -19,6 +19,7 @@ let package = Package(
         .executableTarget(
             name: "wordle-cli",
             dependencies: ["wordle"]),
+        .executableTarget(name: "deegeu-call-rest"),
         .executableTarget(name: "ncurses-mock",
                           linkerSettings:[LinkerSetting.linkedLibrary("ncurses")]),
         .executableTarget(name: "swift-curses-mock1",
