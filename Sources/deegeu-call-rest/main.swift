@@ -7,6 +7,10 @@
 
 import Foundation
 
+// semaphore introduced because of:
+// https://forums.swift.org/t/urlsession-works-on-macos-fail-on-linux/35903/7
+let semaphore = DispatchSemaphore(value: 0)
+
 // From Xcode Help Documentation (URL Loading System)
 func startLoad() {
     let url = URL(string: "https://www.example.com/")!
@@ -24,6 +28,7 @@ func startLoad() {
             let data = data, let string = String(data: data, encoding: .utf8) {
             print(string)
         }
+        semaphore.signal()
     }
     task.resume()
 }
@@ -57,10 +62,12 @@ func updateIP() {
         } catch {
             print("bad things happened")
         }
+        semaphore.signal()
     }
     task.resume()
 }
 
 updateIP()
+semaphore.wait()
 print("Done")
 
